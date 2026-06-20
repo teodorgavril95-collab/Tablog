@@ -3,483 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TABLOG | Premium Contemporary Art Gallery</title>
+    <title>TABLOG | Future-Gen Software & Masterpieces</title>
+    
+    <link rel="icon" type="image/png" href="logo.png">
+    
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        .support-popover {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(12px);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        body { background-color: #030706; }
+        .glow-green { text-shadow: 0 0 20px rgba(0, 255, 102, 0.4); }
+        .glow-btn { box-shadow: 0 0 15px rgba(0, 255, 102, 0.2); }
+        .glow-btn:hover { box-shadow: 0 0 25px rgba(0, 255, 102, 0.5); }
+        .glass-card { 
+            background: linear-gradient(135deg, rgba(10, 18, 15, 0.7) 0%, rgba(5, 9, 7, 0.8) 100%);
+            border: 1px solid rgba(0, 255, 102, 0.08);
         }
-        .support-btn-container:hover .support-popover,
-        .support-btn-container:focus-within .support-popover {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        .glass-card:hover {
+            border-color: rgba(0, 255, 102, 0.25);
         }
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #0A0D0F; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1A2024; border-radius: 999px; }
-        .ambient-glow { box-shadow: 0 0 50px -10px rgba(0, 255, 102, 0.15); }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #030706; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #0f291e; border-radius: 999px; }
     </style>
 </head>
-<body class="bg-[#0A0D0F] text-gray-100 font-sans antialiased custom-scrollbar selection:bg-[#00FF66] selection:text-black">
+<body class="text-gray-200 font-sans antialiased custom-scrollbar selection:bg-[#00FF66] selection:text-black">
 
-    <header class="sticky top-0 z-40 bg-[#0A0D0F]/90 backdrop-blur-lg border-b border-gray-900/60 px-8 py-4 flex flex-wrap justify-between items-center gap-4">
-        <a href="#" class="text-2xl font-black tracking-[0.15em] text-white transition hover:opacity-90">
-            TAB<span class="text-[#00FF66]" style="text-shadow: 0 0 20px rgba(0,255,102,0.35);">LOG</span>
+    <header class="sticky top-0 z-40 bg(#030706/80) backdrop-blur-xl border-b border-emerald-950/40 px-8 py-4 flex flex-wrap justify-between items-center gap-4">
+        <a href="#" class="text-xl font-black tracking-[0.2em] text-white transition hover:opacity-90">
+            TAB<span class="text-[#00FF66] glow-green">LOG</span>
         </a>
 
-        <nav class="flex flex-wrap items-center gap-2 sm:gap-4 order-3 sm:order-none w-full sm:w-auto justify-center">
-            <button onclick="filterByCollection('all')" class="px-4 py-2 text-xs font-bold text-white hover:text-[#00FF66] bg-gray-950/80 border border-gray-900 rounded-xl transition cursor-pointer">All Works</button>
-            <button onclick="filterByCollection('exhibitions')" class="px-4 py-2 text-xs font-bold text-gray-400 hover:text-[#00FF66] bg-gray-950/40 hover:bg-gray-950 border border-transparent hover:border-gray-900 rounded-xl transition cursor-pointer"><i class="fa-solid fa-wand-magic-sparkles text-[#00FF66] mr-1"></i> Current Shows</button>
-            <button onclick="toggleExhibitionLighting()" class="px-4 py-2 text-xs font-bold text-gray-400 hover:text-amber-400 bg-gray-950/40 border border-transparent hover:border-gray-900 rounded-xl transition cursor-pointer"><i class="fa-solid fa-lightbulb mr-1.5"></i> Gallery Lights</button>
-            <a href="admin.html" class="px-4 py-2 text-xs font-bold text-gray-500 hover:text-white transition"><i class="fa-solid fa-lock-open mr-1"></i> Staff Panel</a>
+        <nav class="hidden md:flex items-center gap-6 text-xs font-semibold tracking-wider text-gray-400">
+            <button onclick="filterByCollection('all')" class="hover:text-[#00FF66] transition cursor-pointer text-[#00FF66]">HOME</button>
+            <button onclick="filterByCollection('exhibitions')" class="hover:text-[#00FF66] transition cursor-pointer">SERVICES</button>
+            <a href="#metrics-section" class="hover:text-[#00FF66] transition">ABOUT</a>
+            <a href="#features-section" class="hover:text-[#00FF66] transition">FEATURES</a>
         </nav>
 
-        <div class="flex items-center gap-3 ml-auto sm:ml-0">
-            <div class="relative support-btn-container">
-                <button class="flex items-center gap-2 px-4 py-2.5 bg-gray-950 hover:bg-gray-900 text-xs font-semibold rounded-full border border-gray-850 text-gray-300 cursor-pointer transition shadow-md">
-                    <i class="fa-solid fa-headset text-[#00FF66]"></i> Curated Support
-                </button>
-                <div class="support-popover absolute right-0 mt-3 w-72 bg-gray-950 border border-gray-850 rounded-2xl p-5 shadow-2xl z-50">
-                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-3">Private Curated Support</p>
-                    <div class="space-y-3 text-sm">
-                        <a href="tel:0728057010" class="flex items-center gap-3 text-white hover:text-[#00FF66] transition group">
-                            <span class="w-8 h-8 rounded-lg bg-gray-900 flex items-center justify-center border border-gray-800 group-hover:border-[#00FF66]/30"><i class="fa-solid fa-phone text-xs"></i></span>
-                            <div>
-                                <p class="text-[10px] text-gray-500 font-medium">Direct Hotline</p>
-                                <p class="font-bold text-gray-200 text-xs">0728057010</p>
-                            </div>
-                        </a>
-                        <a href="mailto:Magdamanescu@gmail.com" class="flex items-center gap-3 text-white hover:text-[#00FF66] transition group break-all">
-                            <span class="w-8 h-8 rounded-lg bg-gray-900 flex items-center justify-center border border-gray-800 group-hover:border-[#00FF66]/30"><i class="fa-solid fa-envelope text-xs"></i></span>
-                            <div>
-                                <p class="text-[10px] text-gray-500 font-medium">Acquisitions Desk</p>
-                                <p class="font-bold text-gray-200 text-xs">Magdamanescu@gmail.com</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <button onclick="toggleCartPanel(true)" class="relative p-2.5 bg-gray-950 hover:bg-gray-900 rounded-full border border-gray-850 text-white cursor-pointer transition shadow-sm">
-                <i class="fa-solid fa-bag-shopping text-sm"></i>
-                <span id="cart-counter" class="absolute -top-1 -right-1 bg-[#00FF66] text-black font-black text-[9px] w-5 h-5 rounded-full flex items-center justify-center transition-transform duration-300">0</span>
+        <div class="flex items-center gap-4">
+            <a href="admin.html" class="text-xs font-bold text-gray-500 hover:text-white transition"><i class="fa-solid fa-terminal text-[#00FF66] mr-1.5"></i> Terminal Workspace</a>
+            
+            <button onclick="toggleCartPanel(true)" class="relative p-2.5 bg-emerald-950/20 hover:bg-emerald-950/40 rounded-xl border border-emerald-900/40 text-white cursor-pointer transition">
+                <i class="fa-solid fa-box text-xs text-[#00FF66]"></i>
+                <span id="cart-counter" class="absolute -top-1.5 -right-1.5 bg-[#00FF66] text-black font-black text-[9px] w-4.5 h-4.5 rounded-md flex items-center justify-center">0</span>
             </button>
         </div>
     </header>
 
-    <div id="gallery-lighting-filter" class="transition-colors duration-700 min-h-screen">
-        <main class="max-w-7xl mx-auto px-8 py-12">
-            
-            <div class="mb-12 max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gray-950 border border-gray-850 rounded-full text-[11px] text-gray-400 font-medium mb-5 shadow-sm">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#00FF66] animate-pulse"></span> Museum-Grade Physical Canvas Masterpieces
+    <main class="max-w-7xl mx-auto px-8 py-12 space-y-24">
+        
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-6">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-950/30 border border-emerald-900/30 rounded-full text-[11px] text-[#00FF66] font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#00FF66] animate-pulse"></span> SYSTEM STATUS: OPERATIONAL
                 </div>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tight text-white mb-5 leading-[1.05]">
-                    Acquire Exclusive <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-400 to-gray-600">Original Artwork Collection</span>
+                <h1 class="text-4xl md:text-6xl font-black tracking-tight text-white leading-[1.1]">
+                    We Create World <br>Advancing Software <br>With <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF66] via-emerald-400 to-white">Vision & Passion</span>
                 </h1>
-                <p class="text-gray-400 text-xs md:text-sm max-w-xl leading-relaxed">Each physical masterpiece is cataloged across multi-angle image spectrums, completely hand-signed by the artist, and securely packaged for private courier transport.</p>
-            </div>
-
-            <section class="bg-gray-950/50 border border-gray-900 rounded-3xl p-5 mb-12 backdrop-blur-sm shadow-xl">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                    <div class="lg:col-span-2 relative">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
-                        <input type="text" id="search-input" placeholder="Search paintings by title, medium, narrative..." class="w-full bg-gray-900/60 border border-gray-800 rounded-xl pl-11 pr-4 py-3 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#00FF66] transition">
-                    </div>
-                    <div>
-                        <select id="price-filter" class="w-full bg-gray-900/60 border border-gray-800 rounded-xl px-4 py-3 text-xs text-gray-300 focus:outline-none focus:border-[#00FF66] transition cursor-pointer">
-                            <option value="all">All Valuation Scales</option>
-                            <option value="under-1000">Under €1,000</option>
-                            <option value="1000-2000">€1,000 - €2,000</option>
-                            <option value="over-2000">Over €2,000</option>
-                        </select>
-                    </div>
-                    <div>
-                        <select id="medium-filter" class="w-full bg-gray-900/60 border border-gray-800 rounded-xl px-4 py-3 text-xs text-gray-300 focus:outline-none focus:border-[#00FF66] transition cursor-pointer">
-                            <option value="all">All Medium Classifications</option>
-                            <option value="oil">Oil Layer Coatings</option>
-                            <option value="acrylic">Acrylic Fluids</option>
-                            <option value="mixed">Mixed Textured Media</option>
-                        </select>
-                    </div>
-                    <div>
-                        <select id="sort-filter" class="w-full bg-gray-900/60 border border-gray-800 rounded-xl px-4 py-3 text-xs text-gray-300 focus:outline-none focus:border-[#00FF66] transition cursor-pointer">
-                            <option value="default">Default Archive Sequence</option>
-                            <option value="low-high">Price: Low to High</option>
-                            <option value="high-low">Price: High to Low</option>
-                            <option value="sale-only">⚡ Active Promotional Sale</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <section id="paintings-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                </section>
-        </main>
-    </div>
-
-    <div id="wall-preview-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <div onclick="toggleWallPreview(false)" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
-        <div class="relative bg-[#12161A] border border-gray-800 w-full max-w-4xl rounded-3xl p-8 overflow-hidden shadow-2xl text-center">
-            <h3 class="text-sm font-bold tracking-widest text-gray-400 uppercase mb-8"><i class="fa-solid fa-couch text-[#00FF66] mr-2"></i> Digital Architectural Scale Wall Preview</h3>
-            
-            <div class="w-full h-80 bg-neutral-900 rounded-2xl relative border border-neutral-800 ambient-glow flex flex-col justify-end p-8 overflow-hidden">
-                <div class="absolute inset-0 flex items-center justify-center p-4">
-                    <img id="wall-preview-canvas" src="" class="h-44 object-contain shadow-2xl border-4 border-black transition-transform duration-300">
-                </div>
-                <div class="w-72 h-14 bg-neutral-800/80 backdrop-blur-xs border border-neutral-700/50 rounded-xl mx-auto z-10 flex items-center justify-center shadow-md">
-                    <span class="text-[10px] text-neutral-500 font-mono tracking-widest uppercase">Simulated Living Room Sofa</span>
+                <p class="text-gray-400 text-xs md:text-sm max-w-xl leading-relaxed">
+                    Welcome to the central core. We help catalog and manage performance-driven configurations, unique digital assets, and premium textured canvas structures seamlessly over secure protocols.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="#paintings-grid" class="glow-btn px-6 py-3.5 bg-[#00FF66] text-black font-black text-xs uppercase tracking-widest rounded-xl transition font-mono flex items-center gap-2">
+                        Get started now <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <button class="px-5 py-3.5 bg-transparent text-gray-300 hover:text-white font-bold text-xs rounded-xl transition">
+                        Learn more information &rarr;
+                    </button>
                 </div>
             </div>
-            <p class="text-xs text-neutral-400 mt-6 max-w-md mx-auto leading-relaxed">Art scale simulation maps standard canvas measurement metrics accurately to give you an elegant spatial understanding prior to checkout.</p>
-        </div>
-    </div>
+
+            <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-56 relative overflow-hidden">
+                    <div>
+                        <div class="text-2xl font-black text-white">$500K+</div>
+                        <div class="text-[11px] text-gray-500 mt-1 uppercase font-mono">Saved Through Optimization</div>
+                    </div>
+                    <div class="text-6xl text-emerald-900/20 absolute -bottom-4 -right-4"><i class="fa-solid fa-cubes"></i></div>
+                    <div class="text-[10px] text-[#00FF66] font-mono border border-emerald-900/30 px-2 py-1 rounded bg-emerald-950/20 w-fit">100% Secure</div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-56 bg-gradient-to-b from-emerald-950/20 to-transparent">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center border border-emerald-900/40">
+                        <i class="fa-solid fa-shield text-[#00FF66]"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-black text-white">10+</div>
+                        <div class="text-[11px] text-gray-500 mt-1 uppercase font-mono">Core Integrations</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="metrics-section" class="border-y border-emerald-950/30 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center bg-gradient-to-r from-transparent via-emerald-950/5 to-transparent">
+            <div>
+                <div class="text-3xl md:text-4xl font-black text-white tracking-tight">500+</div>
+                <div class="text-[11px] text-gray-500 font-mono mt-1 uppercase tracking-wider">Successful Projects</div>
+            </div>
+            <div>
+                <div class="text-3xl md:text-4xl font-black text-[#00FF66] tracking-tight glow-green">60%</div>
+                <div class="text-[11px] text-gray-500 font-mono mt-1 uppercase tracking-wider">Faster Launch Time</div>
+            </div>
+            <div>
+                <div class="text-3xl md:text-4xl font-black text-white tracking-tight">120%</div>
+                <div class="text-[11px] text-gray-500 font-mono mt-1 uppercase tracking-wider">Average Performance Increase</div>
+            </div>
+            <div>
+                <div class="text-3xl md:text-4xl font-black text-white tracking-tight">24/7</div>
+                <div class="text-[11px] text-gray-500 font-mono mt-1 uppercase tracking-wider">System Operational</div>
+            </div>
+        </section>
+
+        <section id="features-section" class="space-y-6">
+            <div>
+                <h2 class="text-xs font-bold text-[#00FF66] uppercase tracking-widest font-mono">Discover All Core Features</h2>
+                <p class="text-2xl font-black text-white mt-1">Unlock Powerful Systems Architectures</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl space-y-3">
+                    <i class="fa-solid fa-mobile-button text-xl text-[#00FF66]"></i>
+                    <h3 class="font-bold text-sm text-white">Responsive Framework</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Fully optimized layout architecture built to scale down seamlessly to mobile camera rolls and desktop viewports.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-3">
+                    <i class="fa-solid fa-network-wired text-xl text-[#00FF66]"></i>
+                    <h3 class="font-bold text-sm text-white">Direct File Engine</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Converts local image asset arrays directly into secure local storage data lines strings effortlessly.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-3">
+                    <i class="fa-solid fa-credit-card text-xl text-[#00FF66]"></i>
+                    <h3 class="font-bold text-sm text-white">Secure Settlement Matrix</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Sandbox processing layout ready to handle simulated acquisition logs directly with terminal desks.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="space-y-8">
+            <div class="flex flex-wrap justify-between items-end gap-4">
+                <div>
+                    <h2 class="text-xs font-bold text-[#00FF66] uppercase tracking-widest font-mono">Live Repositories</h2>
+                    <p class="text-2xl font-black text-white mt-1">Explore Uploaded Catalog Inventories</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <input type="text" id="search-input" placeholder="Search parameters..." class="bg-neutral-950 border border-emerald-950 px-4 py-2.5 rounded-xl text-xs text-white focus:outline-none focus:border-[#00FF66] transition placeholder-gray-600">
+                    <select id="sort-filter" class="bg-neutral-950 border border-emerald-950 px-4 py-2.5 rounded-xl text-xs text-gray-400 focus:outline-none focus:border-[#00FF66] cursor-pointer">
+                        <option value="default">Default Sort Sequence</option>
+                        <option value="low-high">Value: Low to High</option>
+                        <option value="high-low">Value: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="paintings-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                </div>
+        </section>
+    </main>
 
     <div id="cart-drawer" class="fixed inset-0 z-50 invisible transition-all duration-300">
-        <div onclick="toggleCartPanel(false)" class="absolute inset-0 bg-black/70 backdrop-blur-xs"></div>
-        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-gray-950 border-l border-gray-900 shadow-2xl flex flex-col justify-between">
-            <div class="p-6 border-b border-gray-900 flex justify-between items-center bg-[#0A0D0F]">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-folder-open text-[#00FF66]"></i>
-                    <h2 class="font-extrabold text-base text-white">Your Cart Portfolio</h2>
-                </div>
-                <button onclick="toggleCartPanel(false)" class="px-3 py-1.5 bg-gray-900 hover:bg-gray-850 text-[11px] font-bold rounded-lg text-gray-400 hover:text-white cursor-pointer transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-arrow-left text-[10px]"></i> Go Back
-                </button>
+        <div onclick="toggleCartPanel(false)" class="absolute inset-0 bg-black/80 backdrop-blur-xs"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-[#070d0a] border-l border-emerald-950/40 shadow-2xl flex flex-col justify-between p-6">
+            <div class="flex justify-between items-center border-b border-emerald-950/40 pb-4">
+                <h2 class="font-black text-sm text-white uppercase tracking-wider"><i class="fa-solid fa-folder text-[#00FF66] mr-2"></i> Allocation Buffer</h2>
+                <button onclick="toggleCartPanel(false)" class="text-xs text-gray-500 hover:text-white cursor-pointer">Close &times;</button>
             </div>
-
-            <div id="cart-items-wrapper" class="p-6 overflow-y-auto flex-grow custom-scrollbar space-y-4"></div>
-
-            <div class="p-6 border-t border-gray-900 bg-[#0A0D0F]">
-                <div class="space-y-2 mb-5 text-xs">
-                    <div class="flex justify-between text-gray-400"><span>Subtotal Value</span><span id="subtotal-display" class="text-white font-mono font-bold">€0.00</span></div>
-                    <div class="flex justify-between text-gray-400"><span>Insured Freight Delivery</span><span class="text-[#00FF66] font-bold uppercase tracking-wider text-[10px]">Complimentary VIP</span></div>
-                    <div class="border-t border-gray-850 my-2 pt-2 flex justify-between text-sm font-black text-white"><span>Total Gross Valuation</span><span id="total-display" class="text-[#00FF66] font-mono">€0.00</span></div>
-                </div>
-                <button id="checkout-gateway-trigger" onclick="toggleCheckoutWindow(true)" class="w-full py-3.5 bg-[#00FF66] hover:bg-[#00FF55] disabled:bg-gray-850 disabled:text-gray-600 text-black font-black text-xs rounded-xl tracking-widest uppercase shadow-lg transition cursor-pointer flex items-center justify-center gap-2">
-                    Proceed to Acquisition Form <i class="fa-solid fa-arrow-right"></i>
-                </button>
+            <div id="cart-items-wrapper" class="flex-grow overflow-y-auto py-4 space-y-3 custom-scrollbar"></div>
+            <div class="border-t border-emerald-950/40 pt-4 space-y-4">
+                <div class="flex justify-between text-xs font-mono"><span class="text-gray-500">Gross Valuation:</span><span id="total-display" class="text-[#00FF66] font-bold">€0.00</span></div>
+                <button onclick="toggleCheckoutWindow(true)" class="w-full py-3.5 bg-[#00FF66] text-black text-xs font-mono font-black uppercase tracking-widest rounded-xl transition hover:opacity-90 cursor-pointer">Compile Order Requisition</button>
             </div>
         </div>
     </div>
 
     <div id="checkout-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <div onclick="toggleCheckoutWindow(false)" class="absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
-        <div class="relative bg-gray-950 border border-gray-850 w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-            <div class="p-6 border-b border-gray-900 flex justify-between items-center bg-[#0A0D0F]">
-                <h3 class="font-black text-sm text-white uppercase tracking-wider flex items-center gap-2"><i class="fa-solid fa-shield-halved text-[#00FF66]"></i> Secure Acquisition Gateway</h3>
-                <button onclick="toggleCheckoutWindow(false)" class="p-1.5 bg-gray-900 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition cursor-pointer"><i class="fa-solid fa-xmark px-1"></i></button>
-            </div>
-            
-            <form id="order-acquisition-form" onsubmit="finalizeCollectorPurchase(event)" class="p-6 overflow-y-auto custom-scrollbar space-y-6 text-xs">
-                <div>
-                    <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">1. Collector Reference Profile</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-gray-400 mb-1.5 font-medium">Full Legal Name *</label>
-                            <input type="text" required id="form-name" placeholder="Johnathan Doe" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-[#00FF66] transition">
-                        </div>
-                        <div>
-                            <label class="block text-gray-400 mb-1.5 font-medium">Secure Contact Phone *</label>
-                            <input type="tel" required id="form-phone" placeholder="+40 722 000 000" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-[#00FF66] transition">
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">2. Insured Freight Routing Destination</h4>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-gray-400 mb-1.5 font-medium">Delivery Address *</label>
-                            <input type="text" required id="form-address" placeholder="Strada Lipscani Nr. 45, Ap. 2" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-[#00FF66] transition">
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-gray-400 mb-1.5 font-medium">City Location *</label>
-                                <input type="text" required id="form-city" placeholder="Bucharest" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-[#00FF66] transition">
-                            </div>
-                            <div>
-                                <label class="block text-gray-400 mb-1.5 font-medium">ZIP Code *</label>
-                                <input type="text" required id="form-zip" placeholder="030167" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-[#00FF66] transition">
-                            </div>
-                            <div>
-                                <label class="block text-gray-400 mb-1.5 font-medium">Country *</label>
-                                <input type="text" required id="form-country" placeholder="Romania" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-[#00FF66] transition">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">3. Settlement Authorization Layer (Emulated Processing)</h4>
-                    <div class="bg-gray-900/60 border border-gray-850 p-4 rounded-2xl space-y-4">
-                        <div>
-                            <label class="block text-gray-400 mb-1.5 font-medium">Cardholder Printed Identity *</label>
-                            <input type="text" required placeholder="JOHNATHAN DOE" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-white uppercase font-mono text-xs tracking-wider focus:outline-none focus:border-[#00FF66] transition">
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="sm:col-span-2">
-                                <label class="block text-gray-400 mb-1.5 font-medium">Account Card Numbers *</label>
-                                <input type="text" required pattern="[0-9 ]{13,19}" placeholder="4000 1234 5678 9010" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-white font-mono text-xs tracking-widest focus:outline-none focus:border-[#00FF66] transition">
-                            </div>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div>
-                                    <label class="block text-gray-400 mb-1.5 font-medium">Expiry *</label>
-                                    <input type="text" required placeholder="MM/YY" maxlength="5" class="w-full bg-gray-950 border border-gray-800 rounded-xl py-2.5 text-center text-white font-mono text-xs focus:outline-none focus:border-[#00FF66] transition">
-                                </div>
-                                <div>
-                                    <label class="block text-gray-400 mb-1.5 font-medium">CVC *</label>
-                                    <input type="password" required placeholder="•••" maxlength="4" class="w-full bg-gray-950 border border-gray-800 rounded-xl py-2.5 text-center text-white font-mono text-xs focus:outline-none focus:border-[#00FF66] transition">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pt-4 border-t border-gray-900 flex justify-between items-center">
-                    <p class="text-gray-500 max-w-xs leading-relaxed"><i class="fa-solid fa-lock text-[#00FF66] mr-1"></i> Insured acquisition data protocol layer active. Sandbox Environment.</p>
-                    <button type="submit" class="px-6 py-3 bg-[#00FF66] hover:bg-[#00FF55] text-black font-black uppercase tracking-widest rounded-xl transition cursor-pointer shadow-md">
-                        Authorize Allocation Clear
-                    </button>
-                </div>
+        <div onclick="toggleCheckoutWindow(false)" class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
+        <div class="relative bg-[#070d0a] border border-emerald-950 max-w-md w-full rounded-2xl p-6 shadow-2xl">
+            <h3 class="font-black text-xs text-white uppercase tracking-widest mb-4 text-center"><i class="fa-solid fa-shield-halved text-[#00FF66] mr-1.5"></i> Authorized Clearing Channel</h3>
+            <form onsubmit="finalizeCollectorPurchase(event)" class="space-y-4 text-xs">
+                <input type="text" required placeholder="Collector Full Legal Identity" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
+                <input type="tel" required placeholder="Secure Routing Destination Phone" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
+                <button type="submit" class="w-full py-3 bg-[#00FF66] text-black font-black uppercase tracking-widest rounded-xl cursor-pointer">Authorize Allocation</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Synchronized Base Stock Backup
         const fallbackStockData = [
-            {
-                id: 1,
-                title: "Neon Horizon",
-                price: 1400,
-                onSale: true,
-                salePrice: 950,
-                medium: "oil",
-                mediumLabel: "Oil Layer Coatings",
-                dimensions: "120x90 cm",
-                description: "An exceptional piece blending highly luminous modern layers over deep classical shadow work, offering intense focus under spotlight illumination.",
-                images: ["https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=600"]
-            }
+            { id: 1, title: "Neon Horizon Core", price: 1400, mediumLabel: "System Software Layer", dimensions: "120x90 cm", description: "Default pre-compiled structural asset demonstrating dark ambient illumination sync capabilities.", images: ["https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600"] }
         ];
 
-        let databaseStore = JSON.parse(localStorage.getObj = localStorage.getItem('tablog_inventory')) || fallbackStockData;
+        let databaseStore = JSON.parse(localStorage.getItem('tablog_inventory')) || fallbackStockData;
         let cart = [];
-        let lightState = true;
 
         function renderGalleryDashboard(data) {
             const grid = document.getElementById('paintings-grid');
             grid.innerHTML = '';
-            
             if(data.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full py-20 text-center border border-dashed border-gray-900 rounded-3xl">
-                        <i class="fa-solid fa-box-open text-3xl text-gray-700 mb-3"></i>
-                        <p class="text-gray-500 text-xs font-medium">No artwork entries match your search configurations.</p>
-                    </div>`;
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-gray-600 text-xs font-mono">No inventory data lines matched active query parameters.</div>`;
                 return;
             }
-
             data.forEach(art => {
-                const finalCostDisplay = art.onSale 
-                    ? `<span class="text-[#00FF66]">€${art.salePrice}</span> <span class="text-xs line-through text-gray-600 ml-1.5">€${art.price}</span>` 
-                    : `<span>€${art.price}</span>`;
-                
-                const promotionalTag = art.onSale ? `<span class="bg-[#00FF66] text-black text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider">Promo Drop</span>` : '';
-
-                // Ensure image array structure safety
-                const imgArray = Array.isArray(art.images) ? art.images : [art.images || 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=600'];
-
+                const imgArray = Array.isArray(art.images) ? art.images : [art.images];
                 grid.innerHTML += `
-                    <div class="group bg-gray-950/30 border border-gray-900/80 rounded-2xl overflow-hidden hover:border-gray-800 transition duration-300 flex flex-col">
-                        <div class="relative aspect-square w-full bg-gray-950 overflow-hidden">
-                            <img src="${imgArray[0]}" id="painting-view-${art.id}" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
-                            
-                            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/75 backdrop-blur-md px-2 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300">
-                                ${imgArray.filter(Boolean).map((img) => `
-                                    <button onclick="swapActiveImagePreview(${art.id}, '${img}')" class="w-7 h-7 rounded-md border border-gray-700 overflow-hidden hover:border-[#00FF66] transition cursor-pointer">
-                                        <img src="${img}" class="w-full h-full object-cover">
-                                    </button>
-                                `).join('')}
+                    <div class="glass-card rounded-2xl overflow-hidden flex flex-col p-4 transition-all duration-300">
+                        <div class="aspect-square bg-neutral-950 rounded-xl overflow-hidden relative border border-emerald-950/20">
+                            <img src="${imgArray[0]}" id="preview-${art.id}" class="w-full h-full object-cover">
+                            <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/60 backdrop-blur-md p-1 rounded-lg">
+                                ${imgArray.map(img => `<button onclick="document.getElementById('preview-${art.id}').src='${img}'" class="w-6 h-6 rounded bg-neutral-900 border border-emerald-950 overflow-hidden"><img src="${img}" class="w-full h-full object-cover"></button>`).join('')}
                             </div>
                         </div>
-
-                        <div class="p-5 flex flex-col flex-grow">
-                            <div class="flex items-center gap-2 mb-2">
-                                ${promotionalTag}
-                                <span class="bg-gray-900 text-gray-400 border border-gray-850 text-[9px] font-bold uppercase px-2 py-0.5 rounded">Museum-Grade Original</span>
+                        <div class="pt-4 flex flex-col flex-grow space-y-2">
+                            <div class="flex justify-between items-start">
+                                <h3 class="font-bold text-sm text-white">${art.title}</h3>
+                                <span class="text-xs font-mono font-bold text-[#00FF66]">€${art.price}</span>
                             </div>
-                            <div class="flex justify-between items-start mb-1">
-                                <h3 class="font-extrabold text-sm text-white group-hover:text-[#00FF66] transition">${art.title}</h3>
-                                <div class="text-xs font-mono font-bold">${finalCostDisplay}</div>
-                            </div>
-                            <p class="text-[10px] text-gray-500 font-mono mb-3">${art.mediumLabel || art.medium} &bull; ${art.dimensions}</p>
-                            <p class="text-gray-400 text-xs line-clamp-2 mb-4 leading-relaxed flex-grow">${art.description || ''}</p>
-                            
-                            <button onclick="simulateWallRoomScale('${art.title}', '${imgArray[0]}')" class="w-full mb-2 bg-gray-950 hover:bg-gray-900 text-gray-400 hover:text-white text-[11px] font-bold py-2.5 rounded-lg border border-gray-850 hover:border-gray-700 transition cursor-pointer">
-                                <i class="fa-solid fa-couch text-[10px] mr-1.5"></i> Wall Preview Scale
-                            </button>
-                            
-                            <button onclick="commitItemToCart(${art.id})" class="w-full bg-white hover:bg-[#00FF66] text-black font-black text-xs uppercase tracking-wider py-2.5 rounded-xl transition cursor-pointer">
-                                Acquire Masterpiece
-                            </button>
+                            <p class="text-[10px] text-gray-500 font-mono">${art.dimensions} &bull; ${art.mediumLabel || 'Standard Spec'}</p>
+                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed flex-grow">${art.description || ''}</p>
+                            <button onclick="commitItemToCart(${art.id})" class="w-full py-2.5 bg-emerald-950/40 text-white hover:bg-[#00FF66] hover:text-black font-black text-xs uppercase tracking-wider rounded-xl transition cursor-pointer font-mono">Acquire Module</button>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
         }
 
-        function swapActiveImagePreview(artId, url) {
-            document.getElementById(`painting-view-${artId}`).src = url;
-        }
-
-        function simulateWallRoomScale(title, imgUrl) {
-            document.getElementById('wall-preview-canvas').src = imgUrl;
-            toggleWallPreview(true);
-        }
-
-        function toggleWallPreview(show) {
-            document.getElementById('wall-preview-modal').classList.toggle('hidden', !show);
-        }
-
-        function toggleExhibitionLighting() {
-            lightState = !lightState;
-            const filterLayer = document.getElementById('gallery-lighting-filter');
-            if(!lightState) {
-                filterLayer.classList.replace('bg-transparent', 'bg-black/80');
-                alert("💡 Dark Room Exhibition Mode Active: Spotlights adjusted specifically to emphasize textured canvas finishes.");
-            } else {
-                filterLayer.classList.replace('bg-black/80', 'bg-transparent');
-            }
-        }
-
-        function filterByCollection(type) {
-            if(type === 'exhibitions') {
-                const collectionPromoItems = databaseStore.filter(a => a.onSale);
-                renderGalleryDashboard(collectionPromoItems);
-            } else {
-                renderGalleryDashboard(databaseStore);
-            }
-        }
+        function filterByCollection(type) { renderGalleryDashboard(databaseStore); }
 
         function runLiveDynamicFiltering() {
             const searchVal = document.getElementById('search-input').value.toLowerCase();
-            const priceVal = document.getElementById('price-filter').value;
-            const mediumVal = document.getElementById('medium-filter').value;
             const sortVal = document.getElementById('sort-filter').value;
-
-            let results = databaseStore.filter(art => {
-                const textMatch = art.title.toLowerCase().includes(searchVal) || (art.description && art.description.toLowerCase().includes(searchVal));
-                let checkPrice = art.onSale ? art.salePrice : art.price;
-                
-                let evaluationMatch = true;
-                if(priceVal === 'under-1000') evaluationMatch = checkPrice < 1000;
-                else if(priceVal === '1000-2000') evaluationMatch = checkPrice >= 1000 && checkPrice <= 2000;
-                else if(priceVal === 'over-2000') evaluationMatch = checkPrice > 2000;
-
-                let styleClassificationMatch = true;
-                if(mediumVal !== 'all') styleClassificationMatch = art.medium === mediumVal;
-
-                return textMatch && evaluationMatch && styleClassificationMatch;
-            });
-
-            if(sortVal === 'low-high') {
-                results.sort((a, b) => (a.onSale ? a.salePrice : a.price) - (b.onSale ? b.salePrice : b.price));
-            } else if(sortVal === 'high-low') {
-                results.sort((a, b) => (b.onSale ? b.salePrice : b.price) - (a.onSale ? a.salePrice : a.price));
-            } else if(sortVal === 'sale-only') {
-                results = results.filter(art => art.onSale);
-            }
-
+            let results = databaseStore.filter(art => art.title.toLowerCase().includes(searchVal));
+            if(sortVal === 'low-high') results.sort((a,b) => a.price - b.price);
+            if(sortVal === 'high-low') results.sort((a,b) => b.price - a.price);
             renderGalleryDashboard(results);
         }
 
         document.getElementById('search-input').addEventListener('input', runLiveDynamicFiltering);
-        document.getElementById('price-filter').addEventListener('change', runLiveDynamicFiltering);
-        document.getElementById('medium-filter').addEventListener('change', runLiveDynamicFiltering);
         document.getElementById('sort-filter').addEventListener('change', runLiveDynamicFiltering);
 
-        function toggleCartPanel(show) {
-            const panel = document.getElementById('cart-drawer');
-            panel.classList.toggle('invisible', !show);
-            if(show) renderActiveCartItemsList();
-        }
+        function toggleCartPanel(show) { document.getElementById('cart-drawer').classList.toggle('invisible', !show); if(show) renderActiveCartItemsList(); }
+        function toggleCheckoutWindow(show) { document.getElementById('checkout-modal').classList.toggle('hidden', !show); if(show) toggleCartPanel(false); }
 
         function commitItemToCart(id) {
-            const assetMatch = databaseStore.find(art => art.id === id);
-            if(assetMatch && !cart.some(i => i.id === id)) {
-                cart.push(assetMatch);
-                syncCounterBadges();
-                toggleCartPanel(true);
-            } else {
-                alert("This unique original painting is already allocated inside your acquisition drawer.");
-            }
+            const match = databaseStore.find(art => art.id === id);
+            if(match && !cart.some(i => i.id === id)) { cart.push(match); syncCounterBadges(); toggleCartPanel(true); }
         }
 
-        function dropCartItemRow(id) {
-            cart = cart.filter(i => i.id !== id);
-            syncCounterBadges();
-            renderActiveCartItemsList();
-        }
-
-        function syncCounterBadges() {
-            document.getElementById('cart-counter').innerText = cart.length;
-            document.getElementById('checkout-gateway-trigger').disabled = cart.length === 0;
-        }
+        function syncCounterBadges() { document.getElementById('cart-counter').innerText = cart.length; }
 
         function renderActiveCartItemsList() {
-            const element = document.getElementById('cart-items-wrapper');
-            element.innerHTML = '';
-            let cumulativeFinances = 0;
-
-            if(cart.length === 0) {
-                element.innerHTML = `<div class="h-64 flex flex-col items-center justify-center text-center text-gray-600"><p class="text-xs">Your portfolio acquisition cart stands clean.</p></div>`;
-                document.getElementById('subtotal-display').innerText = `€0.00`;
-                document.getElementById('total-display').innerText = `€0.00`;
-                return;
-            }
-
-            cart.forEach(art => {
-                const definitiveValue = art.onSale ? art.salePrice : art.price;
-                cumulativeFinances += definitiveValue;
-                const imgArray = Array.isArray(art.images) ? art.images : [art.images];
-
-                element.innerHTML += `
-                    <div class="flex gap-4 bg-[#0A0D0F] border border-gray-900 p-3 rounded-xl items-center">
-                        <img src="${imgArray[0]}" class="w-12 h-12 object-cover rounded-lg border border-gray-850">
-                        <div class="flex-grow min-w-0">
-                            <h4 class="font-bold text-xs text-white truncate">${art.title}</h4>
-                            <p class="text-xs text-[#00FF66] font-mono">€${definitiveValue}</p>
-                        </div>
-                        <button onclick="dropCartItemRow(${art.id})" class="p-1.5 text-gray-500 hover:text-red-400 cursor-pointer"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div>
-                `;
-            });
-
-            document.getElementById('subtotal-display').innerText = `€${cumulativeFinances.toFixed(2)}`;
-            document.getElementById('total-display').innerText = `€${cumulativeFinances.toFixed(2)}`;
+            const wrapper = document.getElementById('cart-items-wrapper'); let total = 0; wrapper.innerHTML = '';
+            if(cart.length === 0) { wrapper.innerHTML = `<p class="text-xs text-gray-600 text-center py-8 font-mono">Buffer empty.</p>`; document.getElementById('total-display').innerText = '€0.00'; return; }
+            cart.forEach(item => { total += item.price; wrapper.innerHTML += `<div class="flex justify-between items-center bg-neutral-950 p-2.5 border border-emerald-950/40 rounded-xl text-xs"><span class="text-white font-bold">${item.title}</span><span class="text-[#00FF66] font-mono">€${item.price}</span></div>`; });
+            document.getElementById('total-display').innerText = `€${total.toFixed(2)}`;
         }
 
-        function toggleCheckoutWindow(show) {
-            document.getElementById('checkout-modal').classList.toggle('hidden', !show);
-            if(show) toggleCartPanel(false);
-        }
-
-        function finalizeCollectorPurchase(event) {
-            event.preventDefault();
-            alert(`🎉 ACQUISITION INVOICE COMPILED SUCCESSFULLY!\nA formal transaction dispatch log has been sent to internal acquisitions desks: Magdamanescu@gmail.com.`);
-            cart = [];
-            syncCounterBadges();
-            toggleCheckoutWindow(false);
-        }
+        function finalizeCollectorPurchase(event) { event.preventDefault(); alert("🎉 Order processing matrix authorization dispatched safely."); cart = []; syncCounterBadges(); toggleCheckoutWindow(false); }
 
         renderGalleryDashboard(databaseStore);
-        syncCounterBadges();
     </script>
 </body>
 </html>
