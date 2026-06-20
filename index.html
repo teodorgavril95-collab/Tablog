@@ -25,18 +25,19 @@
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #030706; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #0f291e; border-radius: 999px; }
+        .step-node.active { background-color: #00FF66; color: black; box-shadow: 0 0 15px rgba(0, 255, 102, 0.4); }
     </style>
 </head>
 <body class="text-gray-200 font-sans antialiased custom-scrollbar selection:bg-[#00FF66] selection:text-black">
 
-    <header class="sticky top-0 z-40 bg(#030706/80) backdrop-blur-xl border-b border-emerald-950/40 px-8 py-4 flex flex-wrap justify-between items-center gap-4">
+    <header class="sticky top-0 z-40 bg-[#030706]/80 backdrop-blur-xl border-b border-emerald-950/40 px-8 py-4 flex flex-wrap justify-between items-center gap-4">
         <a href="#" class="text-xl font-black tracking-[0.2em] text-white transition hover:opacity-90">
             TAB<span class="text-[#00FF66] glow-green">LOG</span>
         </a>
 
         <nav class="hidden md:flex items-center gap-6 text-xs font-semibold tracking-wider text-gray-400">
             <button onclick="filterByCollection('all')" class="hover:text-[#00FF66] transition cursor-pointer text-[#00FF66]">HOME</button>
-            <button onclick="filterByCollection('exhibitions')" class="hover:text-[#00FF66] transition cursor-pointer">SERVICES</button>
+            <a href="#services-section" class="hover:text-[#00FF66] transition">SERVICES & CONTACT</a>
             <a href="#metrics-section" class="hover:text-[#00FF66] transition">ABOUT</a>
             <a href="#features-section" class="hover:text-[#00FF66] transition">FEATURES</a>
         </nav>
@@ -68,9 +69,6 @@
                     <a href="#paintings-grid" class="glow-btn px-6 py-3.5 bg-[#00FF66] text-black font-black text-xs uppercase tracking-widest rounded-xl transition font-mono flex items-center gap-2">
                         Get started now <i class="fa-solid fa-arrow-right"></i>
                     </a>
-                    <button class="px-5 py-3.5 bg-transparent text-gray-300 hover:text-white font-bold text-xs rounded-xl transition">
-                        Learn more information &rarr;
-                    </button>
                 </div>
             </div>
 
@@ -107,11 +105,33 @@
             </div>
             <div>
                 <div class="text-3xl md:text-4xl font-black text-white tracking-tight">120%</div>
-                <div class="text-[11px] text-gray-500 font-mono mt-1 uppercase tracking-wider">Average Performance Increase</div>
+                <div class="text-[11px] text-gray-500 font-mono mt-1 uppercase tracking-wider">Average ROI Increase</div>
             </div>
             <div>
                 <div class="text-3xl md:text-4xl font-black text-white tracking-tight">24/7</div>
                 <div class="text-[11px] text-gray-500 font-mono mt-1 uppercase tracking-wider">System Operational</div>
+            </div>
+        </section>
+
+        <section id="services-section" class="glass-card p-8 rounded-2xl relative overflow-hidden bg-radial from-emerald-950/20 to-transparent">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <h2 class="text-xs font-bold text-[#00FF66] uppercase tracking-widest font-mono">Core Communications</h2>
+                    <p class="text-2xl font-black text-white">Direct Project Channels</p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Have custom setup parameters or administrative specifications? Reach out directly via secure node pathways to get your systems deployed.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-black/40 border border-emerald-950 p-4 rounded-xl space-y-2">
+                        <div class="text-[#00FF66] text-sm"><i class="fa-solid fa-envelope"></i> GMAIL LINK</div>
+                        <a href="mailto:yourusername@gmail.com" class="text-white text-xs block truncate font-mono hover:text-[#00FF66] transition">yourusername@gmail.com</a>
+                    </div>
+                    <div class="bg-black/40 border border-emerald-950 p-4 rounded-xl space-y-2">
+                        <div class="text-[#00FF66] text-sm"><i class="fa-solid fa-phone"></i> SECURE CALL</div>
+                        <a href="tel:+1234567890" class="text-white text-xs block font-mono hover:text-[#00FF66] transition">+123 456 7890</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -155,8 +175,7 @@
                 </div>
             </div>
 
-            <div id="paintings-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                </div>
+            <div id="paintings-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
         </section>
     </main>
 
@@ -177,12 +196,61 @@
 
     <div id="checkout-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div onclick="toggleCheckoutWindow(false)" class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
-        <div class="relative bg-[#070d0a] border border-emerald-950 max-w-md w-full rounded-2xl p-6 shadow-2xl">
-            <h3 class="font-black text-xs text-white uppercase tracking-widest mb-4 text-center"><i class="fa-solid fa-shield-halved text-[#00FF66] mr-1.5"></i> Authorized Clearing Channel</h3>
-            <form onsubmit="finalizeCollectorPurchase(event)" class="space-y-4 text-xs">
-                <input type="text" required placeholder="Collector Full Legal Identity" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
-                <input type="tel" required placeholder="Secure Routing Destination Phone" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
-                <button type="submit" class="w-full py-3 bg-[#00FF66] text-black font-black uppercase tracking-widest rounded-xl cursor-pointer">Authorize Allocation</button>
+        <div class="relative bg-[#070d0a] border border-emerald-950 max-w-lg w-full rounded-2xl p-6 shadow-2xl space-y-6">
+            
+            <div class="flex justify-between items-center px-4">
+                <div class="flex flex-col items-center gap-1">
+                    <span id="step-node-1" class="step-node active w-7 h-7 text-[10px] font-bold rounded-full flex items-center justify-center bg-neutral-900 border border-emerald-950 text-gray-400">1</span>
+                    <span class="text-[9px] text-gray-500 font-mono uppercase">Identity</span>
+                </div>
+                <div class="h-0.5 flex-grow bg-emerald-950 mx-2"></div>
+                <div class="flex flex-col items-center gap-1">
+                    <span id="step-node-2" class="step-node w-7 h-7 text-[10px] font-bold rounded-full flex items-center justify-center bg-neutral-900 border border-emerald-950 text-gray-400">2</span>
+                    <span class="text-[9px] text-gray-500 font-mono uppercase">Delivery</span>
+                </div>
+                <div class="h-0.5 flex-grow bg-emerald-950 mx-2"></div>
+                <div class="flex flex-col items-center gap-1">
+                    <span id="step-node-3" class="step-node w-7 h-7 text-[10px] font-bold rounded-full flex items-center justify-center bg-neutral-900 border border-emerald-950 text-gray-400">3</span>
+                    <span class="text-[9px] text-gray-500 font-mono uppercase">Summary</span>
+                </div>
+            </div>
+
+            <form id="advanced-order-form" onsubmit="finalizeCollectorPurchase(event)" class="text-xs space-y-4">
+                
+                <div id="form-step-1" class="space-y-3">
+                    <h4 class="text-white font-bold mb-2 uppercase font-mono text-[11px] text-[#00FF66]">Step 1: Collector Identity</h4>
+                    <input type="text" id="cust-name" required placeholder="Full Legal Name *" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
+                    <input type="email" id="cust-email" required placeholder="Contact Email Address *" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
+                    <input type="tel" id="cust-phone" required placeholder="Routing Destination Phone (e.g. +40...) *" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
+                    <button type="button" onclick="navigateFormStep(2)" class="w-full py-3 bg-emerald-950 text-[#00FF66] font-bold uppercase rounded-xl transition border border-emerald-900/40 cursor-pointer">Continue to Destination &rarr;</button>
+                </div>
+
+                <div id="form-step-2" class="space-y-3 hidden">
+                    <h4 class="text-white font-bold mb-2 uppercase font-mono text-[11px] text-[#00FF66]">Step 2: Shipping Destination Parameters</h4>
+                    <input type="text" id="cust-address" required placeholder="Physical Delivery Street Address *" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="cust-city" required placeholder="City *" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
+                        <input type="text" id="cust-zip" required placeholder="Postal Zip Code *" class="w-full bg-neutral-950 border border-emerald-950 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00FF66]">
+                    </div>
+                    <div class="flex gap-2 pt-2">
+                        <button type="button" onclick="navigateFormStep(1)" class="w-1/3 py-3 bg-neutral-950 text-gray-400 font-bold uppercase rounded-xl border border-emerald-950 cursor-pointer">&larr; Back</button>
+                        <button type="button" onclick="navigateFormStep(3)" class="w-2/3 py-3 bg-emerald-950 text-[#00FF66] font-bold uppercase rounded-xl transition border border-emerald-900/40 cursor-pointer">Generate Manifest &rarr;</button>
+                    </div>
+                </div>
+
+                <div id="form-step-3" class="space-y-4 hidden">
+                    <h4 class="text-white font-bold uppercase font-mono text-[11px] text-[#00FF66]">Step 3: Compile System Manifest</h4>
+                    <div class="bg-neutral-950 border border-emerald-950 p-4 rounded-xl space-y-2 font-mono text-[11px] text-gray-400">
+                        <div><span class="text-gray-600">Client:</span> <span id="summary-name" class="text-white"></span></div>
+                        <div><span class="text-gray-600">Comms:</span> <span id="summary-comms" class="text-white"></span></div>
+                        <div><span class="text-gray-600">Address:</span> <span id="summary-addr" class="text-white"></span></div>
+                        <div class="border-t border-emerald-950/60 pt-2 mt-2 flex justify-between"><span class="text-gray-500">Total Matrix Valuation:</span> <span id="summary-total" class="text-[#00FF66] font-bold"></span></div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="navigateFormStep(2)" class="w-1/3 py-3 bg-neutral-950 text-gray-400 font-bold uppercase rounded-xl border border-emerald-950 cursor-pointer">&larr; Revise</button>
+                        <button type="submit" class="w-2/3 py-3 bg-[#00FF66] text-black font-black uppercase tracking-widest rounded-xl transition cursor-pointer">Deploy Order Order</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -199,7 +267,7 @@
             const grid = document.getElementById('paintings-grid');
             grid.innerHTML = '';
             if(data.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-12 text-center text-gray-600 text-xs font-mono">No inventory data lines matched active query parameters.</div>`;
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-gray-600 text-xs font-mono">No data lines matched active query parameters.</div>`;
                 return;
             }
             data.forEach(art => {
@@ -240,7 +308,37 @@
         document.getElementById('sort-filter').addEventListener('change', runLiveDynamicFiltering);
 
         function toggleCartPanel(show) { document.getElementById('cart-drawer').classList.toggle('invisible', !show); if(show) renderActiveCartItemsList(); }
-        function toggleCheckoutWindow(show) { document.getElementById('checkout-modal').classList.toggle('hidden', !show); if(show) toggleCartPanel(false); }
+        
+        function toggleCheckoutWindow(show) { 
+            document.getElementById('checkout-modal').classList.toggle('hidden', !show); 
+            if(show) { toggleCartPanel(false); navigateFormStep(1); } 
+        }
+
+        function navigateFormStep(stepNum) {
+            // Hide all steps
+            document.getElementById('form-step-1').classList.add('hidden');
+            document.getElementById('form-step-2').classList.add('hidden');
+            document.getElementById('form-step-3').classList.add('hidden');
+            
+            // Un-light tracker circles
+            document.getElementById('step-node-1').classList.remove('active');
+            document.getElementById('step-node-2').classList.remove('active');
+            document.getElementById('step-node-3').classList.remove('active');
+
+            // Activate current node targets
+            document.getElementById('form-step-' + stepNum).classList.remove('hidden');
+            for(let i = 1; i <= stepNum; i++) {
+                document.getElementById('step-node-' + i).classList.add('active');
+            }
+
+            // Populate summary details step
+            if(stepNum === 3) {
+                document.getElementById('summary-name').innerText = document.getElementById('cust-name').value;
+                document.getElementById('summary-comms').innerText = document.getElementById('cust-email').value + ' | ' + document.getElementById('cust-phone').value;
+                document.getElementById('summary-addr').innerText = document.getElementById('cust-address').value + ', ' + document.getElementById('cust-city').value + ' (' + document.getElementById('cust-zip').value + ')';
+                document.getElementById('summary-total').innerText = document.getElementById('total-display').innerText;
+            }
+        }
 
         function commitItemToCart(id) {
             const match = databaseStore.find(art => art.id === id);
@@ -256,7 +354,14 @@
             document.getElementById('total-display').innerText = `€${total.toFixed(2)}`;
         }
 
-        function finalizeCollectorPurchase(event) { event.preventDefault(); alert("🎉 Order processing matrix authorization dispatched safely."); cart = []; syncCounterBadges(); toggleCheckoutWindow(false); }
+        function finalizeCollectorPurchase(event) { 
+            event.preventDefault(); 
+            alert("🎉 Advanced System Manifest Dispatched safely! Checkouts configured completely."); 
+            cart = []; 
+            syncCounterBadges(); 
+            document.getElementById('advanced-order-form').reset();
+            toggleCheckoutWindow(false); 
+        }
 
         renderGalleryDashboard(databaseStore);
     </script>
